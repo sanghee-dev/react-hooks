@@ -1,14 +1,29 @@
 import React, { useState } from "react";
 
-const App = () => {
-  const [number, setNumber] = useState(0);
+const useInput = (initialValue, validator) => {
+  const [value, setValue] = useState(initialValue);
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    let willUpdate = true;
+    if (typeof validator === "function") {
+      willUpdate = validator(value);
+    }
+    if (willUpdate) {
+      setValue(value);
+    }
+  };
+  return { value, onChange };
+};
 
+const App = () => {
+  const maxLen = (value) => value.length <= 10;
+  const name = useInput("Mr.", maxLen);
   return (
     <div className="container">
-      <h1>Hello, useState!</h1>
-      <h4>현재 숫자는 {number}</h4>
-      <button onClick={() => setNumber(number + 1)}>+</button>
-      <button onClick={() => setNumber(number - 1)}>-</button>
+      <h1>Hello, useInput!</h1>
+      <input placeholder="Name" {...name} />
     </div>
   );
 };
