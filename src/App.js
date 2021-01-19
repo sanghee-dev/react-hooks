@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
 
-const App = () => {
-  const [number, setNumber] = useState(0);
-  const [aNumber, setANumber] = useState(0);
-
-  const sayHello = () => {
-    console.log("Hello!");
+const useTitle = (initialTitle) => {
+  const [title, setTitle] = useState(initialTitle);
+  const updateTitle = () => {
+    const htmlTitle = document.querySelector("title");
+    htmlTitle.innerText = title;
   };
   useEffect(() => {
-    sayHello();
-  }, [number]);
+    updateTitle();
+  }, [title]);
+  return setTitle;
+};
 
+const App = () => {
+  const titleUpdater = useTitle("Loading...");
+  setTimeout(() => titleUpdater("Home"), 2000);
   return (
     <div className="container">
-      <h1>Hello, useEffect!</h1>
-      <button onClick={() => setNumber(number + 1)}>{number}</button>
-      <button onClick={() => setANumber(aNumber + 1)}>{aNumber}</button>
+      <h1>Hello, useTitle!</h1>
     </div>
   );
 };
