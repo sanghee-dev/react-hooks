@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-
-const useBeforeLeave = (onBefore) => {
+export const useBeforeLeave = (onBefore) => {
   useEffect(() => {
     const dot = document.createElement("div");
     dot.classList.add("dot");
@@ -40,15 +38,3 @@ const useBeforeLeave = (onBefore) => {
     onBefore();
   };
 };
-
-const App = () => {
-  const begForLife = () => console.log("Plz dont leave");
-  useBeforeLeave(begForLife);
-  return (
-    <div className="container">
-      <h1>Hello, useBeforeLeave!</h1>
-    </div>
-  );
-};
-
-export default App;
