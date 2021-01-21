@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-
-const useScroll = () => {
+export const useScroll = () => {
   const [state, setState] = useState({ x: 0, y: 0 });
   const onScroll = () => {
     setState({ x: window.scrollX, y: window.scrollY });
@@ -19,14 +17,3 @@ const useScroll = () => {
   };
   return { ...state, style };
 };
-
-const App = () => {
-  const { x, y, style } = useScroll();
-  return (
-    <div className="container" style={{ height: "500vh" }}>
-      <h1 style={style}>Hello, useScroll!</h1>
-    </div>
-  );
-};
-
-export default App;
